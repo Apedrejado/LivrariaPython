@@ -1,0 +1,16 @@
+services:
+  livraria:
+    build: .
+    container_name: livraria_app
+    volumes:
+      - ./data:/data
+      - ./backups:/backups
+      - ./exports:/exports
+      - ./app:/app
+    environment:
+      - DB_PATH=/data/livraria.db
+      - INIT_SQL=/app/init.sql
+    working_dir: /app
+    stdin_open: true # necessário para input()
+    tty: true # mantém o terminal ativo para menu interativo
+    command: ["python", "main.py", "menu"]
